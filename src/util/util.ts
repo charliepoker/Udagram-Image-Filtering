@@ -1,5 +1,6 @@
 import fs from "fs";
 import Jimp = require("jimp");
+
 const axios = require("axios").default;
 
 // filterImageFromURL
@@ -16,7 +17,12 @@ export async function filterImageFromURL(inputURL: string): Promise<string> {
         method: "get",
         url: inputURL,
         responseType: "arraybuffer",
-      }).then(function ({ data: imageBuffer }) {
+      }).then(function ({
+        data: imageBuffer,
+      }: {
+        data: string;
+        imageBuffer: string;
+      }) {
         return Jimp.read(imageBuffer);
       });
       const outpath =
